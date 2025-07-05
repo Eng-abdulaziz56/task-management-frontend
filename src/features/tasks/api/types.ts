@@ -22,7 +22,7 @@ export interface CreateTaskRequest {
   status: TaskStatus;
 }
 
-export interface UpdateTaskRequest extends CreateTaskRequest {}
+export type UpdateTaskRequest = CreateTaskRequest;
 
 export interface GetTasksQueryParams {
   priority?: TaskPriority;

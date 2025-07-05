@@ -7,7 +7,6 @@ import {
   deleteTask 
 } from './index';
 import type { 
-  CreateTaskRequest, 
   UpdateTaskRequest, 
   GetTasksQueryParams 
 } from './types';
@@ -54,10 +53,10 @@ export function useCreateTask() {
         description: `${data.message || 'Task created successfully'} • 📧 Email notification sent`,
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to create task',
+        description: (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to create task',
         variant: 'destructive',
       });
     },
@@ -80,10 +79,10 @@ export function useUpdateTask() {
         description: `${data.message || 'Task updated successfully'} • 📧 Email notification sent`,
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to update task',
+        description: (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to update task',
         variant: 'destructive',
       });
     },
@@ -105,10 +104,10 @@ export function useDeleteTask() {
         description: `${data.message || 'Task deleted successfully'} • 📧 Email notification sent`,
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error.response?.data?.message || 'Failed to delete task',
+        description: (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to delete task',
         variant: 'destructive',
       });
     }, 

@@ -7,7 +7,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
     // TODO: Replace with your actual auth logic
-    const user: any = null;
+    const user: unknown = null;
     const location = useLocation();
     const navigate = useNavigate();
     const defaultTab = new URLSearchParams(location.search).get("type") || "login";
