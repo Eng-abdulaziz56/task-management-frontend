@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Plus, Loader2, LogOut } from 'lucide-react';
 import { useAuthStore } from '@/features/auth/store';
 import { TaskCard } from './components/TaskCard';
@@ -86,7 +85,6 @@ export function TasksPage() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Task Management</h1>
@@ -102,7 +100,6 @@ export function TasksPage() {
         </Button>
       </div>
 
-      {/* Filters */}
       <TaskFilters
         key="task-filters"
         filters={filters}
@@ -110,7 +107,6 @@ export function TasksPage() {
         onClearFilters={clearFilters}
       />
 
-      {/* Tasks Grid */}
       <div className="relative">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
@@ -147,7 +143,6 @@ export function TasksPage() {
           </div>
         )}
         
-        {/* Overlay spinner when refetching (but not on initial load) */}
         {isFetching && !isLoading && (
           <div className="absolute inset-0 bg-white/60 flex items-center justify-center z-10">
             <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
@@ -156,7 +151,6 @@ export function TasksPage() {
         )}
       </div>
 
-      {/* Create Task Dialog */}
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader> 
@@ -170,7 +164,6 @@ export function TasksPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Edit Task Dialog */}
       <Dialog open={!!editingTask} onOpenChange={() => setEditingTask(null)}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
@@ -187,7 +180,6 @@ export function TasksPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog 
         open={isDeleteDialogOpen} 
         onOpenChange={(open) => {
@@ -235,7 +227,6 @@ export function TasksPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Floating Action Button */}
       <Button
         onClick={() => setIsCreateDialogOpen(true)}
         className="fixed bottom-8 right-8 h-16 w-16 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 border-0"

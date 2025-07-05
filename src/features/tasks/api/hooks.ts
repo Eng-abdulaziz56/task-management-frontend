@@ -13,7 +13,6 @@ import type {
 } from './types';
 import { useToast } from '@/hooks/use-toast';
 
-// Query keys
 export const taskKeys = {
   all: ['tasks'] as const,
   lists: () => [...taskKeys.all, 'list'] as const,
@@ -27,7 +26,7 @@ export function useTasks(filters?: GetTasksQueryParams) {
   return useQuery({
     queryKey: taskKeys.list(filters),
     queryFn: () => getTasks(filters),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000, 
   });
 }
 
@@ -37,11 +36,10 @@ export function useTask(id: string) {
     queryKey: taskKeys.detail(id),
     queryFn: () => getTask(id),
     enabled: !!id,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 }
 
-// Create task hook
 export function useCreateTask() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -66,7 +64,6 @@ export function useCreateTask() {
   });
 }
 
-// Update task hook
 export function useUpdateTask() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -93,7 +90,7 @@ export function useUpdateTask() {
   });
 }
 
-// Delete task hook
+
 export function useDeleteTask() {
   const queryClient = useQueryClient();
   const { toast } = useToast();

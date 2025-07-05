@@ -24,17 +24,17 @@ export function TaskFilters({ filters, onFiltersChange, onClearFilters }: TaskFi
   const debouncedSearchValue = useDebounce(searchValue, 500);
   const filtersRef = useRef(filters);
 
-  // Keep ref updated with latest filters
+
   useEffect(() => {
     filtersRef.current = filters;
   });
 
-  // Update filters when debounced search value changes
+
   useEffect(() => {
     onFiltersChange({ ...filtersRef.current, search: debouncedSearchValue || undefined });
   }, [debouncedSearchValue, onFiltersChange]);
 
-  // Update local search value when filters change (e.g., when clearing filters)
+
   useEffect(() => {
     setSearchValue(filters.search || '');
   }, [filters.search]);

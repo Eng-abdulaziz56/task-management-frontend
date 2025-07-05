@@ -47,7 +47,6 @@ api.interceptors.response.use(
         console.log(error.response)
         if (error.response?.status === 401 && !originalRequest._retry) {
             if (isRefreshing) {
-                // If already refreshing, queue this request
                 return new Promise((resolve, reject) => {
                     failedQueue.push({ resolve, reject });
                 }).then(() => {
@@ -64,8 +63,7 @@ api.interceptors.response.use(
             const refreshToken = authStore.refresh_token;
 
             if (!refreshToken) {
-                console.log("redirect to auth");
-                // No refresh token available, redirect to auth
+    
                 authStore.clearTokens();
                 window.location.href = '/auth';
                 return Promise.reject(error);
@@ -75,26 +73,20 @@ api.interceptors.response.use(
                 const response = await refreshTokenApi(refreshToken);
                 const { access_token, refresh_token } = response;
 
-                // Update tokens in store
                 authStore.setTokens(access_token, refresh_token);
 
-                // Update the original request with new token
                 if (originalRequest.headers) {
                     originalRequest.headers.Authorization = `Bearer ${access_token}`;
                 }
 
-                // Process queued requests
                 processQueue(null, access_token);
 
-                // Retry the original request
                 return api(originalRequest);
             } catch (refreshError) {
                 console.log("redirect to auth");
-                // Refresh token failed, clear storage and redirect to auth
                 authStore.clearTokens();
                 processQueue(refreshError, null);
 
-                // Redirect to auth page
                 window.location.href = '/auth';
                 return Promise.reject(refreshError);
             } finally {
