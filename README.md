@@ -54,3 +54,14 @@ docker-compose up --build
 
 - Spring boot Backend API runs on `http://localhost:8080`
 - Docker is installed for containerized development
+
+## 🚀 CI/CD Pipeline
+
+✅ **CI/CD Pipeline Ready** - Automated testing and building on pull requests to main branch.
+
+**What's included:**
+- Automated tests with (placeholder for pipeline)
+- Docker build and testing
+- Pull request validation
+
+**Deployment:** Server deployment commented out (no server available)
