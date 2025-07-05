@@ -13,8 +13,8 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Expose port 3000 for development server
+# Expose port 5173
 EXPOSE 5173
 
-# Use development server instead of build + serve
-CMD ["npm", "run" ,"dev"]
+# Use development server with host binding for Docker
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
